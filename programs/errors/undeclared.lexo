@@ -1,0 +1,2 @@
+# This program uses an undeclared variable
+print(naem)

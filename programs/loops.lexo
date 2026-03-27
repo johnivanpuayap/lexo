@@ -1,0 +1,20 @@
+# While loop: count to 5
+i: int = 1
+while i <= 5:
+    print(i)
+    i = i + 1
+
+# For loop: iterate over an array
+fruits: string[] = ["apple", "banana", "cherry"]
+for fruit: string in fruits:
+    print(fruit)
+
+# Break and continue
+j: int = 0
+while true:
+    j = j + 1
+    if j == 3:
+        continue
+    if j > 5:
+        break
+    print(j)

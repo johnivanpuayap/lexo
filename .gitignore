@@ -1,0 +1,24 @@
+# Build artifacts
+web/public/lexo.wasm
+web/dist/
+
+# Dependencies
+web/node_modules/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Go build output
+*.exe
+*.test
+
+# Plan files (internal)
+docs/superpowers/

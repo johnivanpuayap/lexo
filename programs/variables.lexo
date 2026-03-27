@@ -1,0 +1,10 @@
+# Variable declarations with explicit types
+name: string = "Alice"
+age: int = 25
+height: float = 5.7
+active: bool = true
+
+print("Name: " + name)
+print(age)
+print(height)
+print(active)

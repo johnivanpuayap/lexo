@@ -1,0 +1,15 @@
+# Array operations
+scores: int[] = [90, 85, 92, 78, 95]
+print(scores[0])
+print(scores.length())
+
+# Sum all scores
+total: int = 0
+for s: int in scores:
+    total = total + s
+print(total)
+
+# String arrays
+names: string[] = ["Alice", "Bob", "Charlie"]
+for name: string in names:
+    print("Hello, " + name)
