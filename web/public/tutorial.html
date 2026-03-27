@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lexo Tutorial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --base: #1e1e2e;
+      --mantle: #181825;
+      --crust: #11111b;
+      --surface0: #313244;
+      --surface1: #45475a;
+      --surface2: #585b70;
+      --overlay0: #6c7086;
+      --text: #cdd6f4;
+      --subtext: #a6adc8;
+      --blue: #89b4fa;
+      --green: #a6e3a1;
+      --red: #f38ba8;
+      --mauve: #cba6f7;
+      --yellow: #f9e2af;
+      --peach: #fab387;
+      --teal: #94e2d5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--base);
+      color: var(--text);
+      font-family: "Inter", -apple-system, sans-serif;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px;
+      height: 48px;
+      background: var(--mantle);
+      border-bottom: 1px solid var(--surface0);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--mauve);
+    }
+
+    .header-subtitle {
+      font-size: 14px;
+      color: var(--subtext);
+      font-weight: 500;
+    }
+
+    .btn {
+      padding: 6px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      background: var(--surface1);
+      color: var(--text);
+      transition: background 0.15s;
+    }
+
+    .btn:hover { background: var(--surface2); }
+
+    .content {
+      display: flex;
+      justify-content: center;
+    }
+
+    .body {
+      max-width: 720px;
+      width: 100%;
+      padding: 40px 24px 80px;
+    }
+
+    section { margin-bottom: 48px; }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--mauve);
+      margin-bottom: 12px;
+      padding-top: 8px;
+      border-top: 1px solid var(--surface0);
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--blue);
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--subtext);
+      margin-bottom: 12px;
+    }
+
+    p code, td code, li code {
+      background: var(--surface0);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      color: var(--peach);
+    }
+
+    pre {
+      background: var(--mantle);
+      border: 1px solid var(--surface0);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 12px 0 16px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text);
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .note {
+      background: rgba(137, 180, 250, 0.08);
+      border-left: 3px solid var(--blue);
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 16px 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--subtext);
+    }
+
+    .note strong { color: var(--blue); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      padding: 8px 12px;
+      background: var(--mantle);
+      color: var(--subtext);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--surface0);
+    }
+
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--surface0);
+      color: var(--text);
+    }
+
+    .toc {
+      background: var(--mantle);
+      border: 1px solid var(--surface0);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0 32px;
+    }
+
+    .toc-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--subtext);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .toc ol {
+      padding-left: 20px;
+    }
+
+    .toc li {
+      margin: 4px 0;
+      font-size: 14px;
+    }
+
+    .toc a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <span class="logo">Lexo</span>
+      <span class="header-subtitle">Language Tutorial</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="body">
+
+      <section>
+        <h1>Welcome to Lexo</h1>
+        <p>
+          Lexo is a statically-typed programming language designed to teach you
+          the fundamentals of type systems. It uses a Python-like syntax with
+          explicit type annotations &mdash; every variable, parameter, and return value
+          has a declared type.
+        </p>
+        <div class="toc">
+          <div class="toc-title">Contents</div>
+          <ol>
+            <li><a href="#hello-world">Hello World</a></li>
+            <li><a href="#variables">Variables &amp; Types</a></li>
+            <li><a href="#operators">Operators</a></li>
+            <li><a href="#control-flow">Control Flow</a></li>
+            <li><a href="#functions">Functions</a></li>
+            <li><a href="#arrays">Arrays</a></li>
+            <li><a href="#strings">String Operations</a></li>
+            <li><a href="#input">Input</a></li>
+            <li><a href="#comments">Comments</a></li>
+            <li><a href="#type-errors">Type Errors</a></li>
+            <li><a href="#reference">Quick Reference</a></li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="hello-world">
+        <h2>1. Hello World</h2>
+        <p>
+          Use <code>print()</code> to display output. Strings can use double
+          or single quotes.
+        </p>
+<pre>print("Hello, World!")
+print('Single quotes work too!')</pre>
+      </section>
+
+      <section id="variables">
+        <h2>2. Variables &amp; Types</h2>
+        <p>
+          Every variable must declare its type. Lexo has four basic types
+          and four array types:
+        </p>
+        <table>
+          <thead>
+            <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>int</code></td><td>Whole numbers</td><td><code>42</code>, <code>-7</code></td></tr>
+            <tr><td><code>float</code></td><td>Decimal numbers</td><td><code>3.14</code>, <code>-0.5</code></td></tr>
+            <tr><td><code>string</code></td><td>Text</td><td><code>"hello"</code>, <code>'world'</code></td></tr>
+            <tr><td><code>bool</code></td><td>Boolean</td><td><code>true</code>, <code>false</code></td></tr>
+            <tr><td><code>int[]</code></td><td>Array of ints</td><td><code>[1, 2, 3]</code></td></tr>
+            <tr><td><code>float[]</code></td><td>Array of floats</td><td><code>[1.0, 2.5]</code></td></tr>
+            <tr><td><code>string[]</code></td><td>Array of strings</td><td><code>["a", "b"]</code></td></tr>
+            <tr><td><code>bool[]</code></td><td>Array of bools</td><td><code>[true, false]</code></td></tr>
+          </tbody>
+        </table>
+        <p>Declare variables with <code>name: type = value</code>:</p>
+<pre>name: string = "Alice"
+age: int = 25
+height: float = 5.7
+active: bool = true
+
+print("Name: " + name)
+print(age)
+print(height)
+print(active)</pre>
+        <div class="note">
+          <strong>No implicit type coercion.</strong> You can't assign a string to an
+          int variable or add an int to a float. This is intentional &mdash; Lexo teaches
+          you to think about types explicitly.
+        </div>
+      </section>
+
+      <section id="operators">
+        <h2>3. Operators</h2>
+        <table>
+          <thead>
+            <tr><th>Category</th><th>Operators</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Arithmetic</td><td><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code></td></tr>
+            <tr><td>Comparison</td><td><code>==</code> <code>!=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code></td></tr>
+            <tr><td>Logical</td><td><code>and</code> <code>or</code> <code>not</code></td></tr>
+            <tr><td>String</td><td><code>+</code> (concatenation)</td></tr>
+          </tbody>
+        </table>
+<pre>x: int = 10 + 5 * 2    # 20 (standard precedence)
+y: bool = 3 > 2         # true
+z: string = "hi" + "!"  # "hi!"
+
+print(x)
+print(y)
+print(z)</pre>
+      </section>
+
+      <section id="control-flow">
+        <h2>4. Control Flow</h2>
+        <h3>If / Elif / Else</h3>
+        <p>
+          Conditions must be <code>bool</code> expressions. Use 4-space
+          indentation for blocks (like Python):
+        </p>
+<pre>age: int = 15
+
+if age >= 18:
+    print("Adult")
+elif age >= 13:
+    print("Teen")
+else:
+    print("Child")</pre>
+
+        <h3>While Loops</h3>
+<pre>i: int = 1
+while i <= 5:
+    print(i)
+    i = i + 1</pre>
+
+        <h3>For Loops</h3>
+        <p>
+          The <code>for</code> loop iterates over arrays. The loop variable
+          must include a type annotation:
+        </p>
+<pre>fruits: string[] = ["apple", "banana", "cherry"]
+for fruit: string in fruits:
+    print(fruit)</pre>
+
+        <h3>Break &amp; Continue</h3>
+        <p>
+          Use <code>break</code> to exit a loop early and <code>continue</code>
+          to skip to the next iteration:
+        </p>
+<pre>i: int = 0
+while true:
+    i = i + 1
+    if i == 3:
+        continue
+    if i > 5:
+        break
+    print(i)
+# Prints: 1, 2, 4, 5</pre>
+      </section>
+
+      <section id="functions">
+        <h2>5. Functions</h2>
+        <p>
+          Define functions with <code>def</code>. All parameters and the
+          return type must be annotated. Use <code>void</code> for functions
+          that don't return a value.
+        </p>
+<pre>def greet(name: string) -> string:
+    return "Hello, " + name + "!"
+
+def add(a: int, b: int) -> int:
+    return a + b
+
+def sayHi() -> void:
+    print("Hi!")
+
+print(greet("World"))
+print(add(3, 4))
+sayHi()</pre>
+
+        <h3>Recursion</h3>
+        <p>Functions can call themselves:</p>
+<pre>def factorial(n: int) -> int:
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+print(factorial(6))
+# Prints: 720</pre>
+      </section>
+
+      <section id="arrays">
+        <h2>6. Arrays</h2>
+        <p>
+          Arrays hold multiple values of the same type. Access elements with
+          bracket notation (zero-indexed):
+        </p>
+<pre>scores: int[] = [90, 85, 92, 78, 95]
+
+# Access by index
+print(scores[0])    # 90
+print(scores[4])    # 95
+
+# Get the length
+print(scores.length())  # 5
+
+# Sum all scores
+total: int = 0
+for s: int in scores:
+    total = total + s
+print(total)  # 440</pre>
+      </section>
+
+      <section id="strings">
+        <h2>7. String Operations</h2>
+        <p>Strings have built-in methods:</p>
+        <table>
+          <thead>
+            <tr><th>Method</th><th>Returns</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>.length()</code></td><td><code>int</code></td><td>Number of characters</td></tr>
+            <tr><td><code>.upper()</code></td><td><code>string</code></td><td>Uppercase copy</td></tr>
+            <tr><td><code>.lower()</code></td><td><code>string</code></td><td>Lowercase copy</td></tr>
+            <tr><td><code>.substring(start, end)</code></td><td><code>string</code></td><td>Slice from start to end</td></tr>
+          </tbody>
+        </table>
+<pre>msg: string = "Hello, World!"
+
+print(msg.length())        # 13
+print(msg.upper())         # HELLO, WORLD!
+print(msg.lower())         # hello, world!
+print(msg.substring(0, 5)) # Hello</pre>
+      </section>
+
+      <section id="input">
+        <h2>8. Input</h2>
+        <p>
+          Use <code>input()</code> to read text from the user.
+          It always returns a <code>string</code>:
+        </p>
+<pre>name: string = input("What is your name? ")
+print("Hello, " + name + "!")</pre>
+      </section>
+
+      <section id="comments">
+        <h2>9. Comments</h2>
+        <p>
+          Use <code>#</code> for single-line comments. Everything after <code>#</code> on
+          that line is ignored:
+        </p>
+<pre># This is a comment
+x: int = 42  # This is also a comment
+print(x)</pre>
+      </section>
+
+      <section id="type-errors">
+        <h2>10. Type Errors</h2>
+        <p>
+          One of the key lessons Lexo teaches is that types must match.
+          These programs will produce clear error messages:
+        </p>
+<pre># Type mismatch in assignment
+count: int = 10
+count = "five"    # Error! Can't assign string to int</pre>
+<pre># Wrong argument types
+def add(a: int, b: int) -> int:
+    return a + b
+
+add("hello", "world")  # Error! Expected int, got string</pre>
+        <div class="note">
+          <strong>Why does this matter?</strong> In real-world programming, type
+          errors caught at compile time save you from bugs that would otherwise
+          only appear when your program runs. Lexo catches these errors before
+          your code executes, just like Go, Java, and TypeScript do.
+        </div>
+      </section>
+
+      <section id="reference">
+        <h2>Quick Reference</h2>
+        <h3>Keywords</h3>
+        <p>
+          <code>def</code> <code>return</code> <code>if</code> <code>elif</code>
+          <code>else</code> <code>while</code> <code>for</code> <code>in</code>
+          <code>break</code> <code>continue</code> <code>and</code> <code>or</code>
+          <code>not</code> <code>true</code> <code>false</code> <code>void</code>
+        </p>
+        <h3>Types</h3>
+        <p>
+          <code>int</code> <code>float</code> <code>string</code> <code>bool</code>
+          <code>int[]</code> <code>float[]</code> <code>string[]</code> <code>bool[]</code>
+          <code>void</code>
+        </p>
+        <h3>Built-in Functions</h3>
+        <p>
+          <code>print(value)</code> &mdash; display any value<br />
+          <code>input(prompt)</code> &mdash; read a string from the user
+        </p>
+      </section>
+
+    </div>
+  </div>
+</body>
+</html>

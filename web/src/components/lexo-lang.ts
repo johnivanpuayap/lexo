@@ -13,6 +13,7 @@ export const lexoLanguageDef: languages.IMonarchLanguage = {
     root: [
       [/#.*$/, "comment"],
       [/"[^"]*"/, "string"],
+      [/'[^']*'/, "string"],
       [/\d+\.\d+/, "number.float"],
       [/\d+/, "number"],
       [

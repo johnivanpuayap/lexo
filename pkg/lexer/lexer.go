@@ -78,8 +78,8 @@ func (l *lexer) tokenize() error {
 		case ch == ' ' || ch == '\t':
 			l.advance() // skip whitespace within a line
 
-		case ch == '"':
-			if err := l.readString(); err != nil {
+		case ch == '"' || ch == '\'':
+			if err := l.readString(ch); err != nil {
 				return err
 			}
 
@@ -246,17 +246,17 @@ func (l *lexer) handleIndentation() error {
 	return nil
 }
 
-func (l *lexer) readString() error {
+func (l *lexer) readString(quote byte) error {
 	startLine := l.line
 	startCol := l.column
-	l.advance() // skip opening "
+	l.advance() // skip opening quote
 
 	var sb strings.Builder
 	for l.pos < len(l.source) {
 		ch := l.source[l.pos]
-		if ch == '"' {
+		if ch == quote {
 			l.tokens = append(l.tokens, Token{Type: STRING_LIT, Value: sb.String(), Line: startLine, Column: startCol})
-			l.advance() // skip closing "
+			l.advance() // skip closing quote
 			return nil
 		}
 		if ch == '\n' {
@@ -271,6 +271,8 @@ func (l *lexer) readString() error {
 				sb.WriteByte('\t')
 			case '"':
 				sb.WriteByte('"')
+			case '\'':
+				sb.WriteByte('\'')
 			case '\\':
 				sb.WriteByte('\\')
 			default:

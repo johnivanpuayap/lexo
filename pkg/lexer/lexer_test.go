@@ -269,6 +269,51 @@ func TestUnterminatedString(t *testing.T) {
 	}
 }
 
+func TestSingleQuotedString(t *testing.T) {
+	tokens, err := Tokenize(`'hello world'`)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if tokens[0].Type != STRING_LIT {
+		t.Errorf("expected STRING_LIT, got %s", tokens[0].Type)
+	}
+	if tokens[0].Value != "hello world" {
+		t.Errorf("expected 'hello world', got '%s'", tokens[0].Value)
+	}
+}
+
+func TestSingleQuotedWithEscape(t *testing.T) {
+	tokens, err := Tokenize(`'it\'s fine'`)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if tokens[0].Value != "it's fine" {
+		t.Errorf("expected \"it's fine\", got '%s'", tokens[0].Value)
+	}
+}
+
+func TestMixedQuotes(t *testing.T) {
+	tokens, err := Tokenize(`name: string = 'hello "world"'`)
+	if err != nil {
+		t.Fatal(err)
+	}
+	// The string literal should contain the double quotes
+	lit := tokens[4]
+	if lit.Type != STRING_LIT {
+		t.Errorf("expected STRING_LIT, got %s", lit.Type)
+	}
+	if lit.Value != `hello "world"` {
+		t.Errorf("expected 'hello \"world\"', got '%s'", lit.Value)
+	}
+}
+
+func TestUnterminatedSingleQuoteString(t *testing.T) {
+	_, err := Tokenize(`'hello`)
+	if err == nil {
+		t.Fatal("expected error for unterminated single-quoted string")
+	}
+}
+
 func TestLineAndColumn(t *testing.T) {
 	tokens, err := Tokenize("x: int = 1\ny: int = 2\n")
 	if err != nil {

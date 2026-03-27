@@ -88,6 +88,20 @@ body {
   opacity: 0.85;
 }
 
+.btn-tutorial {
+  background: var(--surface1);
+  color: var(--text);
+}
+
+.btn-tutorial:hover {
+  background: var(--surface2);
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
 /* Main Layout */
 .main-layout {
   flex: 1;
@@ -296,3 +310,4 @@ body {
   color: var(--subtext);
   font-size: 18px;
 }
+

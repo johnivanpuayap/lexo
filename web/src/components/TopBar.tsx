@@ -12,6 +12,14 @@ export function TopBar({ onRun, running, ready }: TopBarProps) {
         <span className="topbar-file">untitled.lexo</span>
       </div>
       <div className="topbar-actions">
+        <a
+          className="btn btn-tutorial"
+          href="/tutorial.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Tutorial
+        </a>
         <button
           className="btn btn-run"
           onClick={onRun}
