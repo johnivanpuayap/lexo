@@ -20,5 +20,5 @@ Thumbs.db
 *.exe
 *.test
 
-# Plan files (internal)
-docs/superpowers/
+# Docs and plans (internal)
+docs/

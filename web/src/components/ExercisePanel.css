@@ -1,0 +1,482 @@
+/* ===== Exercise Panel ===== */
+.exercise-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ===== Browser View ===== */
+.exercise-browser {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.exercise-browser-header {
+  padding: 10px 16px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1.5px solid var(--border-light);
+  background: var(--cream);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.exercise-category-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.exercise-category-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.exercise-category-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.exercise-category-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.exercise-category-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ===== Category Card ===== */
+.category-card {
+  margin-bottom: 6px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-light);
+  background: var(--card);
+  overflow: hidden;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.category-card-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text);
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.category-card-header:hover {
+  background: var(--cream);
+}
+
+.category-card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-card-name {
+  font-family: "Fredoka", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.category-card-count {
+  font-family: "Nunito", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.category-progress-bar {
+  height: 4px;
+  background: var(--border-light);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.category-progress-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.category-chevron {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  font-size: 10px;
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.category-chevron.expanded {
+  transform: rotate(180deg);
+}
+
+/* ===== Exercise Rows ===== */
+.category-exercises {
+  border-top: 1px solid var(--border-light);
+}
+
+.exercise-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+  text-align: left;
+  color: var(--text);
+  transition: background 0.15s ease;
+}
+
+.exercise-row:last-child {
+  border-bottom: none;
+}
+
+.exercise-row:hover {
+  background: var(--cream);
+}
+
+.exercise-row-title {
+  font-family: "Nunito", sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.exercise-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.exercise-check {
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ===== Badges ===== */
+.exercise-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.exercise-badge-easy {
+  background: var(--green-light);
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+
+.exercise-badge-medium {
+  background: var(--orange-light);
+  color: var(--orange);
+  border: 1px solid var(--orange);
+}
+
+.exercise-badge-hard {
+  background: var(--red-light);
+  color: var(--red);
+  border: 1px solid var(--red);
+}
+
+.exercise-badge-mode {
+  background: var(--indigo-light);
+  color: var(--indigo);
+  border: 1px solid var(--indigo);
+}
+
+.exercise-badge-done {
+  background: var(--green-light);
+  color: var(--green);
+  border: 1px solid var(--green);
+}
+
+/* ===== Detail View ===== */
+.exercise-detail {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.exercise-detail::-webkit-scrollbar {
+  width: 6px;
+}
+
+.exercise-detail::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.exercise-detail::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.exercise-detail::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.exercise-back-btn {
+  background: none;
+  border: none;
+  color: var(--indigo);
+  font-family: "Fredoka", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
+  margin-bottom: 8px;
+  transition: opacity 0.15s;
+}
+
+.exercise-back-btn:hover {
+  opacity: 0.7;
+}
+
+.exercise-header {
+  margin-bottom: 10px;
+}
+
+.exercise-title {
+  font-family: "Fredoka", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.exercise-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.exercise-description {
+  font-family: "Nunito", sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  white-space: pre-line;
+}
+
+.exercise-description code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  background: var(--cream);
+  padding: 1px 4px;
+  border-radius: 4px;
+  border: 1px solid var(--border-light);
+}
+
+/* ===== Action Buttons ===== */
+.exercise-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.btn-load-exercise {
+  background: var(--indigo-light);
+  color: var(--indigo);
+  border-color: var(--border);
+  font-size: 12px;
+  padding: 6px 14px;
+}
+
+.btn-load-exercise:hover:not(:disabled) {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.btn-validate {
+  background: var(--green);
+  color: #ffffff;
+  border-color: var(--green-dark);
+  font-size: 12px;
+  padding: 6px 14px;
+}
+
+[data-theme="dark"] .btn-validate {
+  color: #1a2e1a;
+}
+
+.btn-validate:hover:not(:disabled) {
+  background: var(--green-dark);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ===== Test Cases ===== */
+.exercise-section-title {
+  font-family: "Fredoka", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.exercise-test-cases {
+  margin-bottom: 12px;
+}
+
+.exercise-test-case {
+  background: var(--cream);
+  border: 1.5px solid var(--border-light);
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  transition: border-color 0.2s ease, background 0.3s ease;
+}
+
+.exercise-test-case.test-passed {
+  border-color: var(--green);
+  background: var(--green-light);
+}
+
+.exercise-test-case.test-failed {
+  border-color: var(--red);
+  background: var(--red-light);
+}
+
+.test-case-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.test-case-label {
+  font-family: "Fredoka", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.test-case-status {
+  font-family: "Fredoka", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.status-pass {
+  background: var(--green);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .status-pass {
+  color: #1a2e1a;
+}
+
+.status-fail {
+  background: var(--red);
+  color: #ffffff;
+}
+
+.test-case-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 3px;
+  align-items: flex-start;
+}
+
+.test-case-label-sm {
+  font-family: "Nunito", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 56px;
+  flex-shrink: 0;
+}
+
+.test-case-value {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.test-case-actual {
+  color: var(--red);
+}
+
+/* ===== Hint ===== */
+.exercise-hint {
+  background: var(--orange-light);
+  border: 1.5px solid var(--orange);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+
+.exercise-hint p {
+  font-family: "Nunito", sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+/* ===== Success ===== */
+.exercise-success {
+  background: var(--green-light);
+  border: 1.5px solid var(--green);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green);
+  text-align: center;
+}
+
+/* ===== Navigation ===== */
+.exercise-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-light);
+}
+
+.btn-nav {
+  flex: 1;
+  background: var(--cream);
+  color: var(--text-secondary);
+  border-color: var(--border);
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+.btn-nav:hover:not(:disabled) {
+  color: var(--indigo);
+  border-color: var(--indigo);
+  box-shadow: var(--shadow-card-hover);
+}

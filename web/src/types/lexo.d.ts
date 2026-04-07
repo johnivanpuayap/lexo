@@ -3,6 +3,7 @@ export interface LexoCallbacks {
   onError: (errorJson: string) => void;
   onComplete: (success: boolean) => void;
   onRequestInput?: (prompt: string) => void;
+  onVariables?: (variablesJson: string) => void;
 }
 
 export interface LexoError {

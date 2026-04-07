@@ -134,6 +134,15 @@ func runProgram(this js.Value, args []js.Value) interface{} {
 			return
 		}
 
+		// Send variables to JS before completing
+		if onVars := callbacks.Get("onVariables"); !onVars.IsUndefined() && !onVars.IsNull() {
+			vars := interp.GetVariables()
+			varsJSON, err := json.Marshal(vars)
+			if err == nil {
+				onVars.Invoke(string(varsJSON))
+			}
+		}
+
 		if !onComplete.IsUndefined() {
 			onComplete.Invoke(true)
 		}

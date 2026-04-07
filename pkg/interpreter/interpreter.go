@@ -551,6 +551,19 @@ func (interp *Interpreter) evalIndexAccess(e *parser.IndexAccess) (Value, error)
 	return arr.Elements[i], nil
 }
 
+func (interp *Interpreter) GetVariables() []map[string]string {
+	vars := interp.globalEnv.All()
+	result := make([]map[string]string, 0, len(vars))
+	for name, val := range vars {
+		result = append(result, map[string]string{
+			"name":  name,
+			"type":  val.Type().String(),
+			"value": val.String(),
+		})
+	}
+	return result
+}
+
 func (interp *Interpreter) evalMethodCall(e *parser.MethodCall) (Value, error) {
 	obj, err := interp.evalExpr(e.Object)
 	if err != nil {

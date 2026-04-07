@@ -1,0 +1,163 @@
+/* Onboarding Overlay */
+.onboarding-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9998;
+  pointer-events: auto;
+}
+
+.onboarding-spotlight {
+  position: fixed;
+  z-index: 9999;
+  border-radius: 16px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  transition: top 180ms ease, left 180ms ease, width 180ms ease, height 180ms ease;
+}
+
+.onboarding-tooltip {
+  position: fixed;
+  z-index: 10000;
+  width: 340px;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.onboarding-tooltip.onboarding-visible {
+  opacity: 1;
+}
+
+.onboarding-tooltip-title {
+  font-family: "Fredoka", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.onboarding-tooltip-body {
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.onboarding-tooltip-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.onboarding-step-indicator {
+  font-family: "Nunito", sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.onboarding-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.onboarding-skip {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: "Nunito", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: color 0.15s;
+}
+
+.onboarding-skip:hover {
+  color: var(--text-secondary);
+}
+
+.onboarding-next {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 12px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--indigo);
+  color: #ffffff;
+  box-shadow: var(--shadow-button);
+  transition: all 0.2s ease-out;
+}
+
+.onboarding-next:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.onboarding-next:active {
+  box-shadow: var(--shadow-pressed);
+  transform: translateY(1px);
+}
+
+/* Centered card for welcome/done steps */
+.onboarding-center-card {
+  position: fixed;
+  z-index: 10000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 36px 32px;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.onboarding-center-card.onboarding-visible {
+  opacity: 1;
+}
+
+.onboarding-center-card .onboarding-tooltip-title {
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: var(--indigo);
+}
+
+.onboarding-center-card .onboarding-tooltip-body {
+  margin-bottom: 28px;
+}
+
+.onboarding-center-card .onboarding-tooltip-footer {
+  justify-content: center;
+}
+
+.onboarding-center-card .onboarding-actions {
+  gap: 16px;
+}
+
+/* Dark overlay for centered steps */
+.onboarding-dim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9998;
+  background: rgba(0, 0, 0, 0.55);
+  transition: opacity 180ms ease;
+}
