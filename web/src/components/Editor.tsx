@@ -1,26 +1,35 @@
 import MonacoEditor, { OnMount } from "@monaco-editor/react";
 import { useRef, useEffect } from "react";
-import { lexoLanguageDef, lexoTheme } from "./lexo-lang";
+import { lexoLanguageDef, lexoLightTheme, lexoDarkTheme } from "./lexo-lang";
 import type { editor } from "monaco-editor";
 
 interface EditorProps {
   value: string;
   onChange: (value: string) => void;
   errorLine?: number | null;
+  theme: "light" | "dark";
 }
 
-export function Editor({ value, onChange, errorLine }: EditorProps) {
+export function Editor({ value, onChange, errorLine, theme }: EditorProps) {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+  const monacoRef = useRef<typeof import("monaco-editor") | null>(null);
   const decorationsRef = useRef<editor.IEditorDecorationsCollection | null>(null);
 
   const handleMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
+    monacoRef.current = monaco;
 
     monaco.languages.register({ id: "lexo" });
     monaco.languages.setMonarchTokensProvider("lexo", lexoLanguageDef);
-    monaco.editor.defineTheme("lexo-dark", lexoTheme);
-    monaco.editor.setTheme("lexo-dark");
+    monaco.editor.defineTheme("lexo-light", lexoLightTheme);
+    monaco.editor.defineTheme("lexo-dark", lexoDarkTheme);
+    monaco.editor.setTheme(theme === "dark" ? "lexo-dark" : "lexo-light");
   };
+
+  useEffect(() => {
+    if (!monacoRef.current) return;
+    monacoRef.current.editor.setTheme(theme === "dark" ? "lexo-dark" : "lexo-light");
+  }, [theme]);
 
   useEffect(() => {
     if (!editorRef.current) return;
@@ -54,7 +63,7 @@ export function Editor({ value, onChange, errorLine }: EditorProps) {
       <MonacoEditor
         height="100%"
         defaultLanguage="lexo"
-        theme="lexo-dark"
+        theme={theme === "dark" ? "lexo-dark" : "lexo-light"}
         value={value}
         onChange={(v) => onChange(v ?? "")}
         onMount={handleMount}

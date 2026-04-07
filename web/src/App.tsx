@@ -16,6 +16,11 @@ function App() {
   const [waitingForInput, setWaitingForInput] = useState(false);
   const [errorLine, setErrorLine] = useState<number | null>(null);
   const [variables] = useState<VariableInfo[]>([]);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  const handleToggleTheme = useCallback(() => {
+    setTheme((t) => (t === "light" ? "dark" : "light"));
+  }, []);
 
   const handleRun = useCallback(() => {
     setOutput([]);
@@ -74,18 +79,24 @@ function App() {
 
   if (loading) {
     return (
-      <div className="loading">
+      <div className="loading" data-theme={theme}>
         <div className="loading-text">Loading Lexo...</div>
       </div>
     );
   }
 
   return (
-    <div className="app">
-      <TopBar onRun={handleRun} running={running} ready={ready} />
+    <div className="app" data-theme={theme}>
+      <TopBar
+        onRun={handleRun}
+        running={running}
+        ready={ready}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
+      />
       <div className="main-layout">
         <div className="left-panel">
-          <Editor value={source} onChange={setSource} errorLine={errorLine} />
+          <Editor value={source} onChange={setSource} errorLine={errorLine} theme={theme} />
           <OutputConsole
             lines={output}
             waitingForInput={waitingForInput}
